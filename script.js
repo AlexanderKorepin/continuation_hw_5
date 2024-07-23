@@ -1,61 +1,37 @@
-/*
-1. Необходимо вывести сообщение в консоль "все теги прогрузились", 
-когда все теги будут созданы браузером.
-*/
+// 1. При изменении значения в input с id="from", значение содержащееся в нем должно моментально отображаться в span. То есть при печати в input'е тег span также должен меняться.
+// const spanEl = document.querySelector('span');
+// document.querySelector('input').addEventListener('input', e => {
+//     spanEl.textContent = e.target.value;
+// });
+//----------------------------------------------------
 
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('все теги прогрузились')
+// 2. При клике на кнопку с классом messageBtn необходимо элементу с классом message:
+// - добавить два класса: animate_animated и animate_fadeInLeftBig
+// - поставить данному элементу стиль visibility в значение 'visible'.
+// const message = document.querySelector('.message');
+// document.querySelector('button').addEventListener('click', () => {
+//     message.classList.add('animate__animated', 'animate__fadeInLeftBig');
+//     message.style.visibility = 'visible';
+// });
+//--------------------------------------------------------
+
+// 3. Необходимо при отправке формы проверить, заполнены ли все поля в этой форме. Если какое-либо поле не заполнено, форма не должна отправляться, также должны быть подсвечены незаполненные поля (необходимо поставить класс error незаполненным полям). Как только пользователь начинает заполнять какое-либо поле, необходимо, при вводе в данное поле, произвести проверку:
+// - Если поле пустое, необходимо данное поле подсветить (поставить класс error данному полю).
+// - Если поле было чем-либо заполнено, подсветку (класс error) необходимо убрать.
+const form = document.querySelector('form');
+const formEl = form.querySelectorAll('input, select');
+form.addEventListener('submit', (e) => {
+    formEl.forEach(formEl => {
+        if (formEl.value === '') {
+            formEl.classList.add('error');
+            e.preventDefault();
+        }
+    });
 });
-/*
-2. Необходимо вывести сообщение в консоль "страница загрузилась", когда все ресурсы страницы будут загружены.
-*/
-window.addEventListener('load', () => {
-    console.log('страница загрузилась')
-});
-/*
-3. При клике на какой-либо тег на странице в консоль должно выводиться
-сообщение наподобие:
-Класс "super_element" присутствует в элементе "div".
-сообщение должно определять присутствует или отсутствует класс
-"super_element" у элемента, а также выводить в нижнем регистре верный
-тег в данной строке, по которому был совершен клик.
-Необходимо использовать делегирование.
-*/
-document.addEventListener('click', event => {
-    const containStr = event.target.classList.contains('super_element')
-        ? 'присутствует' : 'отсутствует';
-    console.log(`Класс "super_element" ${containStr} в элементе 
-    '${event.target.tagName.toLowerCase()}'.`);
-});
-/*
- 4. Сделайте, чтобы при наведении на textarea в консоли появлялось
-сообщение: "Вы навели на textarea."
-*/
-document.querySelector('textarea').addEventListener('mouseover', () => {
-    console.log("Вы навели на textarea.")
-});
-/*
-5. Необходимо повесить событие клика на тег ul. В обработчике события в
-консоль необходимо выводить текст, который записан внутри элемента 
-кнопки, по которой был произведен клик. Если клик был не по кнопке, то ничего выводить не нужно. Необходимо использовать делегирование.
-*/
-document.querySelector('ul').addEventListener('click', event => {
-    if (event.target.tagName !== "BUTTON") {
+form.addEventListener('input', (e) => {
+    if (!e.target.classList.contains('form-control')) {
         return;
     }
-    console.log(event.target.textContent);
+    e.target.value === ''
+        ? e.target.classList.add('error') : e.target.classList.remove('error');
 });
- /*
-6. Вопрос: Почему в console.log пишется сначала текст из 5 задания и 
-только потом выводится текст из 3 задания, если мы кликаем по кнопкам 
-в ul? Ответ необходимо написать здесь же, под этим комментарием, 
-своими словами.
-*/
-//Ответ
-// Порядок действий определяется последовательностью выполнения событий и добавлением элементов в DOM. Первым выполняется событие клика на кнопку в списке "ul".
-/*
- 7. С помощью JS необходимо изменить цвет заднего фона каждого 
-второго тега li.
-*/
-document.querySelectorAll('li:nth-child(2n)')
-    .forEach(el => el.style.backgroundColor = 'grey');
