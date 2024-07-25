@@ -1,1 +1,26 @@
-
+figure {
+    border: thin #e6a356 solid;
+    display: flex;
+    flex-flow: column;
+    padding: 5px;
+    max-width: 220px;
+    margin: auto;
+  }
+  
+  img {
+    max-width: 220px;
+    max-height: 150px;
+  }
+  
+  p {
+    background-color: #6197b4;
+    color: #ffffff;
+    font: italic smaller sans-serif;
+    padding: 3px;
+    text-align: center;
+  }
+div {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
